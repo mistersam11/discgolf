@@ -3,6 +3,53 @@ import os
 import string
 import re
 
+# Hole library
+class Hole1():
+    def __init__(self):
+        self.length = 412
+        self.par = 3
+
+class Hole2():
+    def __init__(self):
+        self.length = 251
+        self.par = 3
+
+class Hole3():
+    def __init__(self):
+        self.length = 512
+        self.par = 4
+
+class Hole4():
+    def __init__(self):
+        self.length = 310
+        self.par = 3
+
+class Hole5():
+    def __init__(self):
+        self.length = 950
+        self.par = 5
+
+class Hole6():
+    def __init__(self):
+        self.length = 230
+        self.par = 3
+
+class Hole7():
+    def __init__(self):
+        self.length = 750
+        self.par = 4
+
+class Hole8():
+    def __init__(self):
+        self.length = 460
+        self.par = 4
+
+class Hole9():
+    def __init__(self):
+        self.length = 1000
+        self.par = 5
+    
+
 # Disc library with accuracy and distance values for each disc type and throw type
 class Driver:
     def __init__(self, throw_type):
@@ -46,6 +93,9 @@ def parse_text(player_input: str):
     throw_types = ['backhand', 'forehand', 'putt']
     disc_types = ['driver', 'midrange', 'putter']
     unwanted_words = ['a', 'the', 'an', 'at', 'to', 'with', 'throw', 'want', 'i']
+    exit_words = ['quit','exit','q','stop']
+
+    if player_input in exit_words: return "exit", "exit"
 
     # Normalize input
     normal_text = player_input.lower()
@@ -86,7 +136,7 @@ def shot_accuracy_check(throw_type, disc_type, current_zone):
 
 
 # Returns throw_distance and potential_zone (either one of the roughs or None) and is_accurate
-def get_shot_distance(throw_type, disc_type, current_zone):
+def get_shot_distance(throw_type, disc_type, current_zone, is_accurate):
     if disc_type == "driver":
         disc = Driver(throw_type)
     elif disc_type == "midrange":
@@ -94,16 +144,16 @@ def get_shot_distance(throw_type, disc_type, current_zone):
     else:
         disc = Putter(throw_type)
 
-    if shot_accuracy_check(throw_type, disc_type, current_zone):
-        return int(disc.distance + ((random.random() + 0.1) * 50)), None, True
+    if is_accurate:
+        return int(disc.distance + ((random.random() + 0.1) * 50)), None
     else:
         if random.random() > 0.5:
-            return int((disc.distance + ((random.random() + 0.1) * 50)) / 2), None, False
+            return int((disc.distance + ((random.random() + 0.1) * 50)) / 2), None
         else:
             if random.random() > 0.5:
-                return int((disc.distance + ((random.random() + 0.1) * 50)) / 4), "rough_shallow", False
+                return int((disc.distance + ((random.random() + 0.1) * 50)) / 4), "rough_shallow"
             else:
-                return int((disc.distance + ((random.random() + 0.1) * 50)) / 8), "rough_deep", False
+                return int((disc.distance + ((random.random() + 0.1) * 50)) / 8), "rough_deep"
 
 # Calculate putt accuracy (used when in circle 1 or 2). Returns True or False
 def putt_accuracy_check(current_zone):
@@ -114,7 +164,7 @@ def putt_accuracy_check(current_zone):
         
 # Calculate putt distance (used when in circle 1 or 2 and putt is inaccurate). Returns the updated current_distance and a past_basket variable to use for messages
 def get_putt_distance(current_distance):
-    updated_distance = current_distance - current_distance + random.randint(1, 20)
+    updated_distance = int(current_distance * random.uniform(0.1, 1.0))
     if updated_distance <= 5:
         return updated_distance, False
     else:
@@ -131,29 +181,119 @@ def get_next_zone(current_distance, potential_zone):
             return "fairway"
     else: return potential_zone
 
+def set_this_hole(current_hole):
+    match current_hole:
+        case 1: return Hole1()
+        case 2: return Hole2()
+        case 3: return Hole3()
+        case 4: return Hole4()
+        case 5: return Hole5()
+        case 6: return Hole6()
+        case 7: return Hole7()
+        case 8: return Hole8()
+        case 9: return Hole9()
+
+# Little function to calculate the score to add to the running score
+def get_score(strokes, par):
+    return strokes - par
+
+def output_results(throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, odd_choice, past_basket, strokes):
+    print()
+
 # Declare wide-scope variables to be updated through game loop
-throw_type = None
-disc_type = None
 current_hole = 1
-current_par = 3
-current_distance = 410
+this_hole = Hole1() 
+current_par = this_hole.par
+current_distance = this_hole.length
 current_zone = None
-made_putt = False
 is_accurate = None
 odd_choice = False
+past_basket = False
 hole_start = True
+strokes = 0
+score = 0
 
 while True:
 
     if hole_start:
         print(f"Hole: {current_hole}, Par: {current_par}, Distance: {current_distance} feet.")
+        print(f"Current score: {score}")
         hole_start = False
+        odd_choice = False
+        strokes = 0
         current_zone = "fairway"
 
-    throw_type, disc_type = parse_text(input("> "))
 
-    #Quitting the program if anything other than a correct command is entered (for now)
-    if disc_type == None: break
+    text1, text2 = parse_text(input("> "))
+    if text1 == "exit":
+        break
+    else:
+        throw_type, disc_type = text1, text2
 
-    if current_zone != "circle1" or "circle2":
-        throw_distance, potential_zone, is_accurate = get_shot_distance(throw_type, disc_type, current_zone)
+    strokes += 1
+
+    if current_zone not in ("circle1", "circle2"):
+            
+        #Get accuracy
+        is_accurate = shot_accuracy_check(throw_type, disc_type, current_zone)
+
+        #Calculate the shot distance
+        throw_distance, potential_zone = get_shot_distance(throw_type, disc_type, current_zone, is_accurate)
+        current_distance -= throw_distance
+        if current_distance < 0:
+            current_distance *= -1
+            past_basket = True
+        else:
+            past_basket = False
+        
+        #Calculate the next zone
+        current_zone = get_next_zone(current_distance, potential_zone)
+
+        #Set leftover variables necessary for output
+        odd_choice = False
+        made_basket = False
+
+        #Output
+        output_results(throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, odd_choice, past_basket, strokes)
+        
+    else:
+        if throw_type == "putt":
+            disc_type = "putter"
+            made_basket = putt_accuracy_check(current_zone)
+            if made_basket:
+                current_hole += 1
+                score += get_score(strokes, this_hole.par)
+                this_hole = set_this_hole(current_hole)
+                current_distance = this_hole.length
+                current_par = this_hole.par
+                hole_start = True
+                current_zone = "fairway" 
+                output_results(throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, odd_choice, past_basket, strokes)
+            else:
+                current_distance, past_basket = get_putt_distance(current_distance)
+                is_accurate = False
+                output_results(throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, odd_choice, past_basket, strokes)
+        else:
+            # Throw a regular shot, but include the odd choice message in output
+            odd_choice = True
+
+            #Get accuracy
+            is_accurate = shot_accuracy_check(throw_type, disc_type, current_zone)
+
+            #Calculate the shot distance
+            throw_distance, potential_zone = get_shot_distance(throw_type, disc_type, current_zone, is_accurate)
+            current_distance -= throw_distance
+            if current_distance < 0:
+                current_distance *= -1
+                past_basket = True
+            else:
+                past_basket = False
+        
+            #Calculate the next zone
+            current_zone = get_next_zone(current_distance, potential_zone)
+
+            # Leftover variables
+            made_basket = False
+            
+            #Print results
+            output_results(throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, odd_choice, past_basket, strokes)
