@@ -1,7 +1,7 @@
 import random
 import os
 import string
-import re
+import json
 
 # Hole library
 class Hole1():
@@ -197,8 +197,61 @@ def set_this_hole(current_hole):
 def get_score(strokes, par):
     return strokes - par
 
-def output_results(throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, odd_choice, past_basket, strokes):
-    print()
+# Output logic
+def output_results(throw_type, disc_type, current_distance, current_zone,
+                   is_accurate, made_basket, past_basket, strokes):
+
+    with open('output-messages.json') as file:
+        messages = json.load(file)
+
+    def render(msg):
+        return msg.format(
+            throw_type=throw_type,
+            disc_type=disc_type,
+            current_distance=current_distance,
+            current_zone=current_zone,
+            strokes=strokes
+        )
+
+    if made_basket:
+        print(render(random.choice(messages["putting"]["made_basket"])))
+
+    elif throw_type == "putt" and current_zone in ("circle2", "circle1"):
+        # PUTTING LOGIC
+        if past_basket:
+            print(render(random.choice(messages["putting"]["missed_putt_long"])))
+        else:
+            print(render(random.choice(messages["putting"]["missed_putt_short"])))
+        
+        print(f"Now throwing shot number {strokes + 1}.")
+
+    else:
+        # NORMAL THROWS
+        if is_accurate:
+            if past_basket:
+                print(render(random.choice(messages["normal_throw"]["good_throw_past"])))
+            else:
+                print(render(random.choice(messages["normal_throw"]["good_throw_not_past"])))
+        else:
+            print(render(random.choice(messages["normal_throw"]["bad_throw"])))
+        
+        match current_zone:
+            case "fairway":
+                print(render(random.choice(messages["zone_type"]["fairway"])))
+            case "circle1":
+                print(render(random.choice(messages["zone_type"]["circle1"])))
+            case "circle2":
+                print(render(random.choice(messages["zone_type"]["circle2"])))
+            case "rough_shallow":
+                print(render(random.choice(messages["zone_type"]["rough_shallow"])))
+            case "rough_deep":
+                print(render(random.choice(messages["zone_type"]["rough_deep"])))
+            case _:
+                print("Nobody knows where you are???")
+        
+        print(f"Now throwing shot number {strokes + 1}.")
+
+    
 
 # Declare wide-scope variables to be updated through game loop
 current_hole = 1
@@ -254,7 +307,7 @@ while True:
         made_basket = False
 
         #Output
-        output_results(throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, odd_choice, past_basket, strokes)
+        output_results(throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, past_basket, strokes)
         
     else:
         if throw_type == "putt":
@@ -267,15 +320,17 @@ while True:
                 current_distance = this_hole.length
                 current_par = this_hole.par
                 hole_start = True
-                current_zone = "fairway" 
-                output_results(throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, odd_choice, past_basket, strokes)
+                current_zone = "fairway"
+
+                #Output
+                output_results(throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, past_basket, strokes)
             else:
                 current_distance, past_basket = get_putt_distance(current_distance)
                 is_accurate = False
-                output_results(throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, odd_choice, past_basket, strokes)
+
+                #Output
+                output_results(throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, past_basket, strokes)
         else:
-            # Throw a regular shot, but include the odd choice message in output
-            odd_choice = True
 
             #Get accuracy
             is_accurate = shot_accuracy_check(throw_type, disc_type, current_zone)
@@ -294,6 +349,6 @@ while True:
 
             # Leftover variables
             made_basket = False
-            
-            #Print results
-            output_results(throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, odd_choice, past_basket, strokes)
+
+            #Output
+            output_results(throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, past_basket, strokes)

@@ -26,8 +26,7 @@ Return the current distance that's the current distance - the current distance +
 *Run with the current distance and the next_zone (from shot distance). If the zone is None, determine the next zone based on the current distance. If the current distance falls within the range of a zone, return that zone. If the zone is something other than None, return whatever zone it is (probably needs a match case statement to match strings).
 
 ## Print out the results
-This will be a pretty robust function. It should take throw type, disc type, current distance, current zone, odd choice, is accurate, and made basket and return a random line from the appropriate setof lines for that action/result. It can print out more than one line. So there can be a line that uses the throw type, disc type, current distance, and current zone. Therewill be a line that states whether or not it was accurate. There will be a line that only prints if it was an odd choice. There will be a line that only prints if the basket was made.
-
+This will be a pretty robust function. It should take throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, odd_choice, past_basket, strokes and return a random line from the appropriate set of lines for that action/result. It can print out more than one line. So there can be a line that uses the throw type, disc type, current distance, and current zone. There will be a line that states whether or not it was accurate. There will be a line that only prints if it was an odd choice. There will be a line that only prints if the basket was made.
 
 # Declare wide-scope variables so that the print function can access them at the end
 throw type = None
@@ -69,6 +68,57 @@ while True: (this is how python loops can be made)
 
     print results
 
+
+
+# Types of messages that I need
+
+## Throw types
+- Good throw (past the basket)
+- Good throw (not past the basket)
+- Bad throw
+
+## Zone types
+- Landed in fairway
+- Landed in shallow rough
+- Landed in deep rough
+- Landed in circle 2
+- Landed in circle 1
+
+## Putting
+- Made putt
+- Missed putt (past the basket)
+- Missed putt (in front of the basket)
+
+## Odd choice
+- The player threw something other than a putt while in the circle.
+
+# Output logic
+def output_results(throw_type, disc_type, current_distance, current_zone, is_accurate, made_basket, odd_choice, past_basket, strokes):
+
+    with open('output-messages.json') as file:
+        messages = json.load(file)
+
+    if made_basket:
+        print(random.choice(messages["putting"]["made_basket"]))
+    else:
+        if throw_type != "putt" and current_zone in ("circle2", "circle1"):
+            print(random.choice(messages["odd_choice"]))
+        if throw_type == "putt" and current_zone in ("circle2", "circle1"):
+            if past_basket:
+                print(random.choice(messages["putting"]["missed_putt_long"]))
+            else:
+                print(random.choice(messages["putting"]["missed_putt_short"]))
+        else:
+            if is_accurate:
+                if past_basket:
+                    print(random.choice(messages["normal_throw"]["good_throw_past"]))
+                else:
+                    print(random.choice(messages["normal_throw"]["good_throw_not_past"]))
+            else:
+                print(random.choice(messages["normal_throw"]["bad_throw"]))
+        
+        print(f"Now throwing shot number {strokes})
+        
 
 
 

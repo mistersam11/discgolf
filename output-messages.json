@@ -1,0 +1,141 @@
+{
+  "normal_throw": {
+    "good_throw_past": [
+      "Nice shot! The {disc_type} flies past the basket to {current_distance} feet!",
+      "Excellent form! Your {disc_type} went so far, it's past the basket and {current_distance} feet away!",
+      "Wonderful! It passed the basket and landed {current_distance} feet from the basket.",
+      "Excelsior! Just like me when I got my car registered in New York, you're on a roll! Your shot soared past the basket to {current_distance} feet!",
+      "AM I DREAMING? That {disc_type} just landed {current_distance} feet behind the basket!",
+      "Paul McBeth couldn't have done it better! Just kidding. It landed {current_distance} feet behind the basket!",
+      "Critical hit! {disc_type} just went all zoomy and landed {current_distance} behind the basket!",
+      "Boom! That shot sailed right past the basket and settled {current_distance} feet away!",
+      "Smooth release! It cruised past the chains and ended up {current_distance} feet out!",
+      "You crushed it! That throw cleared the basket and landed {current_distance} feet beyond!",
+      "Dialed in! Just a touch long—{current_distance} feet past the basket!",
+      "Great power! It skipped past and finished {current_distance} feet away!",
+      "Laser beam! It flew past the target and stuck at {current_distance} feet!",
+      "So close! Just a bit deep—{current_distance} feet beyond the basket!",
+      "What a rip! That one glided past and came to rest {current_distance} feet out!",
+      "Nice line! Carried long and finished {current_distance} feet past!",
+      "Pure flight! It drifted beyond the basket to {current_distance} feet!",
+      "Fantastic shot! Just overshot—now sitting {current_distance} feet away!",
+      "Big arm energy! That disc pushed past to {current_distance} feet!",
+      "Clean throw! It tracked straight past and landed {current_distance} feet out!",
+      "Great commitment! A little long at {current_distance} feet past the basket!",
+      "That’ll play! It flew past and settled {current_distance} feet away!",
+      "Almost parked! Just beyond at {current_distance} feet!",
+      "Lovely toss! It carried past and finished {current_distance} feet out!",
+      "On a rope! Just missed short—ended {current_distance} feet past!",
+      "Confidence throw! It pushed through to {current_distance} feet beyond the basket!",
+      "You’re dialed! Slightly deep, resting {current_distance} feet away!",
+      "Cranked it! That {disc_type} blew past and stopped {current_distance} feet out!",
+      "Great snap! The {throw_type} carried long to {current_distance} feet past!",
+      "Picture-perfect form! A hair long at {current_distance} feet!",
+      "Hot streak! It soared past and landed {current_distance} feet beyond!",
+      "That had juice! Finished {current_distance} feet past the basket!"
+    ],
+    "good_throw_not_past": [
+      "Great throw! Landed {current_distance} feet short of the basket.",
+      "You're getting the hang of this! Flying majestically, you landed at {current_distance} feet from the basket.",
+      "Gadzooks! Not even 2015 Eagle McMahon could've done that! You're now {current_distance} feet from the basket!",
+      "Way to keep it in the middle! It's {current_distance} feet from the basket.",
+      "A big {throw_type} for a big disc golfer! It went all the way to {current_distance} feet!",
+      "The typical {throw_type} with the {disc_type} shot... I expected more of you. Even so, it landed {current_distance} feet away from the basket.",
+      "Nice control! That shot settled {current_distance} feet short of the basket.",
+      "Right on line! It carried cleanly to {current_distance} feet from the basket.",
+      "Solid throw! You're sitting pretty at {current_distance} feet away.",
+      "Great touch! That one parked itself {current_distance} feet from the basket.",
+      "Beautiful flight! It glided right up to {current_distance} feet.",
+      "Well played! That leaves you {current_distance} feet to go.",
+      "Smooth and steady! You're now {current_distance} feet from the basket.",
+      "Great placement! It landed safely at {current_distance} feet away.",
+      "That’ll work! You're looking at {current_distance} feet from the basket.",
+      "Nice shot! It held the line and finished {current_distance} feet out.",
+      "Clean execution! Now sitting {current_distance} feet from the basket.",
+      "Right where you want it! {current_distance} feet away and in control.",
+      "Good speed! It checked up at {current_distance} feet.",
+      "Solid effort! You're left with {current_distance} feet to the basket.",
+      "Consistent throw! It finished {current_distance} feet from the target.",
+      "Great aim! That one stopped at {current_distance} feet away.",
+      "Looking good! You're just {current_distance} feet from the basket now.",
+      "Nice and easy! It settled {current_distance} feet short.",
+      "Reliable shot! You're sitting {current_distance} feet from the pin.",
+      "Dialed approach! That leaves a clean {current_distance}-foot look at the basket."
+    ],
+    "bad_throw": [
+      "Just when it was getting good! Your {disc_type} kareens into the thicket off of a low-hanging branch, {current_distance} feet still left to go!",
+      "You lose your balance on the teepad! Your angle is way off! {current_distance} feet left on the hole!",
+      "What a shank! You hit a tree, bozo. {current_distance} feet to the basket.",
+      "Another day, another errant throw. Try to throw it through the gap next time... you landed {current_distance} feet from the basket.",
+      "Yikes! That {disc_type} came out all wrong—{current_distance} feet still to go!",
+      "Grip lock city! That thing is nowhere near the line, leaving {current_distance} feet to the basket.",
+      "Oof… early release! You're stuck with {current_distance} feet left.",
+      "That tree came out of nowhere! Kicked you off course—{current_distance} feet remaining.",
+      "Not your best… it faded way too soon, leaving {current_distance} feet to clean up.",
+      "Whoa! That turned into something you definitely didn’t plan—{current_distance} feet to go.",
+      "Brutal angle! You yanked it and now you’ve got {current_distance} feet left.",
+      "That'll happen… straight into first available. {current_distance} feet from the basket.",
+      "Yank city! That {throw_type} went wild—{current_distance} feet still left.",
+      "Uh oh! That line was… optimistic. {current_distance} feet to recover.",
+      "Tree magnet activated! You’re sitting {current_distance} feet away now.",
+      "Way off target! That shot leaves you with {current_distance} feet to go.",
+      "You tried something… it didn’t work. {current_distance} feet left on the hole.",
+      "Ouch. That hyzer came way too early—{current_distance} feet remaining.",
+      "Nope! That one sailed way off line, leaving {current_distance} feet to the basket.",
+      "Bit of a disaster there… you’ve still got {current_distance} feet to go.",
+      "That gap was optional, apparently. {current_distance} feet left after that attempt.",
+      "You might want that one back… {current_distance} feet from the basket now.",
+      "Not ideal! That shot clipped everything it could—{current_distance} feet left.",
+      "Well… at least it went forward. {current_distance} feet still to go."
+    ]
+  },
+  "zone_type": {
+    "fairway": [
+      "It landed in the fairway.",
+      "You're in the fairway.",
+      "You've ended up in the fairway.",
+      "It's fairway time."
+    ],
+    "rough_shallow": [
+      "It's in the rough, but not too bad.",
+      "Behind some trees, but with room to maneuver.",
+      "A little off the fairway.",
+      "Just into the woods off the side of the fairway"
+    ],
+    "rough_deep": [
+      "It's way in there, good luck getting out.",
+      "I didn't know thorns could grow that big...",
+      "Make sure not to fall for the 3-meter rule!",
+      "It'll take one huge psionic strike to make that lie work.",
+      "Go holla to yo momma and ask her to help you find your disc.",
+      "It took almost all three of your minutes to find that one.",
+      "This is setting itself up to be a disaster..."
+    ],
+    "circle2": [
+      "Landed in circle 2."
+    ],
+    "circle1": [
+      "Landed in circle 1."
+    ]
+  },
+  "putting": {
+    "made_basket": [
+      "Excellent putt! You've made it!",
+      "Somehow that one caught the chains and stayed in!",
+      "Great pace! It lands in the basket.",
+      "Nice putt!",
+      "Way to go! You made it!"
+    ],
+    "missed_putt_long": [
+      "Missed it long, you're still {current_distance} feet away."
+    ],
+    "missed_putt_short": [
+      "Missed it short, you're {current_distance} feet away.",
+      "Put some mustard on it next time. It hit the ground {current_distance} in front of the basket",
+      "The putter curls up at the base of the basket, {current_distance} feet away."
+    ]
+  },
+  "odd_choice": [
+    "Now why did you throw a {throw_type} from there?"
+  ]
+}
