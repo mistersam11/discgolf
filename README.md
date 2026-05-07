@@ -1,10 +1,10 @@
 # discgolf
 New version of my game inspired by Zork and Planetfall, but much better organized this time
-# 📝 Disc Golf CLI Game – TODO
+# Text-Based Disc Golf Game – TODO
 
-## 🚨 Critical Fixes (Do These First)
+## Critical Fixes (Do These First)
 
-* [ ] **Add end-of-round handling**
+* **Add end-of-round handling**
 
   * Prevent crash after Hole 9
   * Example:
@@ -15,7 +15,7 @@ New version of my game inspired by Zork and Planetfall, but much better organize
         break
     ```
 
-* [ ] **Handle invalid input safely**
+  * **Handle invalid input safely**
 
   * Right now `(None, None)` still gets processed
   * Add guard:
@@ -28,15 +28,15 @@ New version of my game inspired by Zork and Planetfall, but much better organize
 
 ---
 
-## 🎯 Gameplay Improvements
+## Gameplay Improvements
 
-* [ ] **Add “tap-in” logic**
+* **Add “tap-in” logic**
 
   * If `current_distance <= 3`, auto-make putt
 
 ---
 
-* [ ] **Add input help**
+*  **Add input help**
 
   * If invalid input:
 
@@ -44,7 +44,7 @@ New version of my game inspired by Zork and Planetfall, but much better organize
     Try: 'backhand driver' or 'forehand midrange'
     ```
 
-* [ ] **Allow simple inputs**
+*  **Allow simple inputs**
 
   * Accept:
 
@@ -54,15 +54,15 @@ New version of my game inspired by Zork and Planetfall, but much better organize
 
 ---
 
-## 🌪️ Optional Feature
+## Optional Feature
 
-* [ ] **Scorecard at end**
+*  **Scorecard at end**
 
   * Show all holes + strokes
 
 ---
 
-## 🧹 Nice-to-Have Polish
+## Nice-to-Have Polish
 
 * [ ] **Clear screen between shots**
 * [ ] **Add separators between turns**
