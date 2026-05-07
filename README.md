@@ -1,6 +1,31 @@
-# discgolf
+# Text-Based Disc Golf Game 
 New version of my game inspired by Zork and Planetfall, but much better organized this time
-# Text-Based Disc Golf Game – TODO
+
+## Type a command to play
+
+### Throw Types
+- backhand
+- forehand
+- putt
+
+### Disc Types
+- driver
+- midrange
+- putter
+
+**Commands just need to include the "throw type" and "disc type". Most common words like "a" and "the" get filtered out.**
+
+Examples:
+```
+Throw a backhand with a driver
+```
+```
+forehand putter
+```
+
+*hint: if you're inside one of the circles, you really need to putt or it will never go in the basket.*
+
+# TODO
 
 ## Critical Fixes (Do These First)
 
